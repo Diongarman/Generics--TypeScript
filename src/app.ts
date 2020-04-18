@@ -65,7 +65,7 @@ console.log(extractAndConvert({ name: 'dion' }, 'name'));
 They allow for flexibiity whilst still having strongly typed code
 */
 
-class DataStorage<T> {
+class DataStorage<T extends string | number | boolean> {
   private data: T[] = [];
 
   addItem(item: T) {
@@ -94,13 +94,15 @@ console.log(textStorage.getItems());
 
 /*
 objects are reference types (vs primitive values)
+
+class generics changed to not work with objects and only primitives because objects require distinct bespoke method logic
 */
 
-const objStorage = new DataStorage<object>();
-const rickyObject = { name: 'Ricky' };
-objStorage.addItem(rickyObject);
-objStorage.addItem({ name: 'MJ' });
+// const objStorage = new DataStorage<object>();
+// const rickyObject = { name: 'Ricky' };
+// objStorage.addItem(rickyObject);
+// objStorage.addItem({ name: 'MJ' });
 
-//Object passed as an argument below is a new object and therefore doesn't fulfill removeItem method's index based remove logic
-objStorage.removeItem(rickyObject);
-console.log(objStorage.getItems());
+// //Object passed as an argument below is a new object and therefore doesn't fulfill removeItem method's index based remove logic
+// objStorage.removeItem(rickyObject);
+// console.log(objStorage.getItems());
