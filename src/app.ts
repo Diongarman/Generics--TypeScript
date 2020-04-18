@@ -1,3 +1,5 @@
+//Built-in generics
+
 // const names: Array<string> = ['Hello world'];
 // names[0].split(' ');
 
@@ -10,6 +12,8 @@
 // promise.then((data) => {
 //   data.split('');
 // });
+
+//Creating a generic function & Working with constraints
 
 //returns an intersection type set implicitly
 //I have written it explicitly below though it is not neccessary
@@ -41,3 +45,12 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
 }
 
 console.log(countAndDescribe('some string'));
+
+//The 'keyof' Constraint
+
+function extractAndConvert<T extends object, K extends keyof T>(
+  obj: T,
+  key: K
+) {
+  return 'Value: ' + obj[key];
+}
