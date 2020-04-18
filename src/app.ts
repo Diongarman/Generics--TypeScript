@@ -61,6 +61,10 @@ console.log(extractAndConvert({ name: 'dion' }, 'name'));
 
 //Generic Classes
 
+/*
+They allow for flexibiity whilst still having strongly typed code
+*/
+
 class DataStorage<T> {
   private data: T[] = [];
 
@@ -69,7 +73,10 @@ class DataStorage<T> {
   }
 
   removeItem(item: T) {
-    return this.data.splice(this.data.indexOf(item), 1);
+    if (this.data.indexOf(item) === -1) {
+      return;
+    }
+    this.data.splice(this.data.indexOf(item), 1);
   }
 
   getItems() {
@@ -82,3 +89,18 @@ textStorage.addItem('test string');
 textStorage.addItem('12345');
 textStorage.removeItem('test string');
 console.log(textStorage.getItems());
+
+//Object typing reference issues
+
+/*
+objects are reference types (vs primitive values)
+*/
+
+const objStorage = new DataStorage<object>();
+const rickyObject = { name: 'Ricky' };
+objStorage.addItem(rickyObject);
+objStorage.addItem({ name: 'MJ' });
+
+//Object passed as an argument below is a new object and therefore doesn't fulfill removeItem method's index based remove logic
+objStorage.removeItem(rickyObject);
+console.log(objStorage.getItems());
