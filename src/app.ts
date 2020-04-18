@@ -52,5 +52,33 @@ function extractAndConvert<T extends object, K extends keyof T>(
   obj: T,
   key: K
 ) {
-  return 'Value: ' + obj[key];
+  return 'Key: ' + key + ' Value: ' + obj[key];
 }
+//Satisfies keyof type constraint
+console.log(extractAndConvert({ name: 'dion' }, 'name'));
+//fails keyof type constraint
+//extractAndConvert({ name: 'dion' }, 'age');
+
+//Generic Classes
+
+class DataStorage<T> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    return this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    return this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+textStorage.addItem('test string');
+textStorage.addItem('12345');
+textStorage.removeItem('test string');
+console.log(textStorage.getItems());
