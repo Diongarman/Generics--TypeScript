@@ -1,3 +1,12 @@
+//GENERICS
+/*
+About
+
+
+Generics allow for flexibiity whilst still having strongly typed code. They work for functions, classes
+
+*/
+
 //Built-in generics
 
 // const names: Array<string> = ['Hello world'];
@@ -90,6 +99,8 @@ textStorage.addItem('12345');
 textStorage.removeItem('test string');
 console.log(textStorage.getItems());
 
+const numberStorage = new DataStorage<number>();
+
 //Object typing reference issues
 
 /*
@@ -106,3 +117,27 @@ class generics changed to not work with objects and only primitives because obje
 // //Object passed as an argument below is a new object and therefore doesn't fulfill removeItem method's index based remove logic
 // objStorage.removeItem(rickyObject);
 // console.log(objStorage.getItems());
+
+//GENERIC UTILITY TYPES
+
+interface CourseGoal {
+  name: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(
+  name: string,
+  description: string,
+  date: Date
+): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  //incase need to add values dynamically and do some sort of logic
+  courseGoal.name = name;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+
+let noHomersClub: Readonly<string[]> = ['Moe', 'Barney', 'Homer1'];
+//noHomersClub.push('Homers');
